@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <title>简单计算器</title>
+  </head>
+
+  <style>
+    #container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #app {
+        width: 16rem;
+        height: 32rem;
+    }
+  </style>
+
+  <body>
+    <div id="container">
+        <div id="app">
+            <div class="row">
+                <input id="display-area" class="col-12 form-control" v-model="a"></input>
+            </div>
+            <div id="input-area" class="row">
+                <div id="input-panel-number" class="col-8">
+                    <div class="row">
+                        <button class="col btn btn-secondary" @click="add(1)">1</button>
+                        <button class="col btn btn-secondary" @click="add(2)">2</button>
+                        <button class="col btn btn-secondary" @click="add(3)">3</button>
+                    </div>
+                    <div class="row">
+                        <button class="col btn btn-secondary" @click="add(4)">4</button>
+                        <button class="col btn btn-secondary" @click="add(5)">5</button>
+                        <button class="col btn btn-secondary" @click="add(6)">6</button>
+                    </div>
+                    <div class="row">
+                        <button class="col btn btn-secondary" @click="add(7)">7</button>
+                        <button class="col btn btn-secondary" @click="add(8)">8</button>
+                        <button class="col btn btn-secondary" @click="add(9)">9</button>
+                    </div>
+                    <div class="row">
+                        <button class="col btn btn-secondary" @click="add(0)">0</button>
+                    </div>
+                </div>
+                <div id="input-panel-method" class="col-4">
+                    <div class="row">
+                        <button class="col btn btn-secondary" @click="calc(6)">C</button>
+                    </div>
+                    <div class="row">
+                        <button class="col btn btn-secondary" @click="calc(1)">+</button>
+                        <button class="col btn btn-secondary" @click="calc(2)">-</button>
+                    </div>
+                    <div class="row">
+                        <button class="col btn btn-secondary" @click="calc(3)">*</button>
+                        <button class="col btn btn-secondary" @click="calc(4)">/</button>
+                    </div>
+                    <div class="row">
+                        <button class="col btn btn-secondary" @click="calc(5)">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    a: 0,
+                    operate: 0,
+                    res: 0,
+                };
+            },
+            methods: {
+            calc: function (id) {
+          var that = this;
+          switch (id) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+              switch (that.operate) {
+                default:
+                case 1:
+                  that.res += that.a;
+                  that.a = 0;
+                  break;
+                case 2:
+                  that.res -= that.a;
+                  that.a = 0;
+                  break;
+                case 3:
+                  that.res *= that.a;
+                  that.a = 0;
+                  break;
+                case 4:
+                  that.res /= that.a;
+                  that.a = 0;
+                  break;
+              }
+              that.operate = id;
+              break;
+            case 5:
+              switch (that.operate) {
+                default:
+                case 1:
+                  that.res += that.a;
+                  that.a = 0;
+                  break;
+                case 2:
+                  that.res -= that.a;
+                  that.a = 0;
+                  break;
+                case 3:
+                  that.res *= that.a;
+                  that.a = 0;
+                  break;
+                case 4:
+                  that.res /= that.a;
+                  that.a = 0;
+                  break;
+              }
+              that.a = that.res;
+              break;
+            case 6:
+              that.a = that.res = that.operate = 0;
+              break;
+            default:
+              break;
+          }
+        },
+        add: function (num) {
+          var that = this;
+          that.a = that.a * 10 + num;
+        },
+      },
+    }).mount("#app");
+  </script>
+</html>
